@@ -1,4 +1,4 @@
-console.log('This is ES6 version');
+console.log('This is ES6 version of Project 2');
 class Book {
     constructor(name, author, type) {
         this.name = name;
@@ -61,43 +61,28 @@ libraryForm.addEventListener('submit', libraryFormSubmit);
 
 function libraryFormSubmit(e) {
     console.log('YOu have submitted library form');
-    let name = document.getElementById('bookName');
-    let author = document.getElementById('author');
-    let difftype;
+    let name = document.getElementById('bookName').value;
+    let author = document.getElementById('author').value;
+    let type;
     let fiction = document.getElementById('fiction');
     let programming = document.getElementById('programming');
     let cooking = document.getElementById('cooking');
 
     if (fiction.checked) {
-        difftype = fiction.value;
+        type = fiction.value;
     }
     else if (programming.checked) {
-        difftype = programming.value;
+        type = programming.value;
     }
     else if (cooking.checked) {
-        difftype = cooking.value;
+        type = cooking.value;
     }
 
-    //let book = new Book(name, author, type);
-    //console.log(book);
-    let books = localStorage.setItem("book");
-    if(books == null){
-        booksObj =[];
-    }
-    else{
-        booksObj = JSON.parse(books);
-    }
-    let myObj ={
-        name : name.value,
-        author : author.value,
-        type : difftype.value,
+    let book = new Book(name, author, type);
+    console.log(book);
 
-    }
-    booksObj.push(myObj);
-
-    
-    localStorage.setItem("books", JSON.stringify(booksObj));
     let display = new Display();
+
     if (display.validate(book)) {
 
         display.add(book);
